@@ -694,6 +694,11 @@ line console 0 : Changes the context to console config mode.
 line vty 1st-vty last-vty : Changes the context to vty config mode for the range 
 of vty lines listed in the command.
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 login : Console and vty config mode. Tells the IOS to prompt for a password.
 
 password pass-value : Console and vty config mode. Lists the password required 'if the login command (with no params) is configured.

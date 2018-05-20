@@ -132,7 +132,11 @@ Foundation Topics
 Configuring Switch Interfaces
 *******************************
 
+<<<<<<< HEAD
 	IOS uses the tern [interface] to refer to physical ports used to forward data
+=======
+	IOS uses the term [interface] to refer to physical ports used to forward data
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 	to and from other devices. Configurations may differ among interfaces.
 	
 	IOS uses interface subcommands to configure these settings.
@@ -207,7 +211,11 @@ Gi0/2 notconnect 1 auto auto 10/100/1000BaseTX
 	
 	FastEthernet 0/1 (Fa0/1): This output lists a few characters of the 
 	configured description. It also lists the configured speed of 100 and duplex
+<<<<<<< HEAD
 	full per the speed and duplex commands. Howver it also states that Fa0/1 has
+=======
+	full per the speed and duplex commands. However it also states that Fa0/1 has
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 	a status of notconnect, meaning that the interface is not currently working.
 	
 	FastEthernet 0/2 (Fa0/2): This port was not configured at all; has default
@@ -334,7 +342,11 @@ Autonegotiation Under working conditions
 	
 	Ethernet devices on the ends of a link must use the same standard or they 
 	cannot correctly send data.
+<<<<<<< HEAD
 	For example, a NIC cannot use 100BASE-T, which uses 2-par UTP cable with
+=======
+	For example, a NIC cannot use 100BASE-T, which uses 2-pair UTP cable with
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 	a 100Mbps speed, while the switch port on the other end of the link uses
 	1000Base-T.
 	
@@ -342,9 +354,15 @@ Autonegotiation Under working conditions
 	makes it much easier to migrate to the next better standard.
 	
 	
+<<<<<<< HEAD
 	The IEEE autonegotiation protocol helps make it much easries to operate a
 	LAN when NICs and switchports support multiple speeds.
 	IEE autonegotiation (IEEE standards 802.3u (100Mbps Base-T)), defines 
+=======
+	The IEEE autonegotiation protocol helps make it much easier to operate a
+	LAN when NICs and switchports support multiple speeds.
+	IEEE autonegotiation (IEEE standards 802.3u (100Mbps Base-T)), defines 
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 	protocol that lets the 2 UTP-based Ethernet nodes on a link to negotiate so
 	that they each choose to use the same speed & duplex settings.
 	
@@ -427,7 +445,11 @@ Configuring the port security
 	Step 3.
 	(Optional) Override the default max number of allowed MAC addresses 
 	associated with the interface (1) by using the 
+<<<<<<< HEAD
 	**switchport port-security maximum number** interfae subcommand.
+=======
+	**switchport port-security maximum number** interface subcommand.
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 	
 	Step 4.
 	(Optional) Override the default action to take upon a security violation
@@ -495,8 +517,11 @@ Last Source Address : Vlan : 0013.197b.500b:1
 Security Violation Count : 1
 
 SW1# show port-security interface fastEthernet 0/2
+<<<<<<< HEAD
 SW1# show port-security interface fastEthernet
 0/2
+=======
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 Port Security : Enabled
 Port Status : Secure-up
 Violation Mode : Shutdown

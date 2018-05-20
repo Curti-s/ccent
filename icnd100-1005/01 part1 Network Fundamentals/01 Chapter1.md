@@ -8,6 +8,12 @@
 	Starts with a discussion of networking models, which give you the big picture view of the networking rules.
 	
 	Think of networking models as architectural plans for building a house. Networking model defines the rules abt how each part of the network should work as well as how parts should work together.
+<<<<<<< HEAD
+=======
+	People building networking products and those that use them to build their own computer networks follow a particular networking model.
+
+	CCNA exams include a detailed coverage of the TCP/IP networking model. The exams compare TCP/IP to OSi which was the first latrge effort to create a vendor-neutral networking model.
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 	
 - Do I Know This Already?
 *************************
@@ -26,11 +32,26 @@
 	5.  The proces of a web server adding a TCP header to the contents of a web page, followed by adding an IP header and then adding a data link header and trailer is an example of?
 		Data encapsulation
 		
+<<<<<<< HEAD
 		
 - Overview of TCP/IP Networking Model
 **************************************
 	TCP/IP uses documents called Request For Comments (RFC). It has 2 alternative models:
 		TCP/IP original:
+=======
+
+The network created by a corporation or an enterprise  for the purpose of allowing its employees to to communicate is known as **enterprise network**. 
+
+Smaller networks used at home for business purposes are **small office/home office** SOHO networks.
+		
+- Overview of TCP/IP Networking Model
+**************************************
+	TCP/IP model defines and references a large collection of protocols that allow computers to communicate.
+
+	TCP/IP uses documents called Request For Comments (RFC). It has 2 alternative models:
+		
+		TCP/IP original: RFC 1122
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 			Application 
 			Transport
 			Internet
@@ -39,7 +60,11 @@
 		TCP/IP Updated
 			Application
 			Transport
+<<<<<<< HEAD
 			Network
+=======
+			Network / Network Interface/ Network Access
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 			Data Link
 			Physical
 			
@@ -106,7 +131,11 @@
 		Defines the protocols for delivering data over a particular single type of physical network. eg Ethernet data link protocols.
 		
 	Physical layer
+<<<<<<< HEAD
 		Define the physical xristics of the transmission medium, including connectors, pins, electrical currents,light modulation, encoing etc
+=======
+		Define the physical xristics of the transmission medium, including connectors, pins, electrical currents,light modulation, encoding etc
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 		
 
 - Benefits of layered protocols
@@ -121,3 +150,21 @@
 ********************************
 	In order to provide services to the next lower layer, each layer needs to make use of a header and possibly a trailer.
 	OSI uses a more generic term to refer to messages, rather than a frame, packet and segment; PDU --> Protocol Data Unit which presents the bits and includes the headers and trailers for that layer as well as encapsulated data.
+<<<<<<< HEAD
+=======
+
+Steps for data encapsulation:
+
+	1. Create and encapsulate the application data with any required application layer headers.
+		For instance the HTTP OK message can be returned as a HTTP header.
+
+	2. Encapsulate the data provided by the application layer inside the transport layer header.
+		TCP or UDP header is typically used.
+
+	3. Encapsulate the data provided by the transport layer inside the network layer (IP) header.
+
+	4. Encapsulate the data provided by the network layer inside the data link ethernet header 
+		and trailer.
+
+	5. Transmit the bits.
+>>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
