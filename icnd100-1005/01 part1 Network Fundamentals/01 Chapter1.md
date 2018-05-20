@@ -5,7 +5,7 @@
 		* 1.1 Compare and Contrast OSi and TCP/IP models
 		* 1.2 Compare and contrast TCP and UDP protocols
 		
-	Starts with a discussion of networking models, whic give you the big picture view of the networking rules.
+	Starts with a discussion of networking models, which give you the big picture view of the networking rules.
 	
 	Think of networking models as architectural plans for building a house. Networking model defines the rules abt how each part of the network should work as well as how parts should work together.
 	
@@ -72,7 +72,7 @@
 		
 - IP Routing Basics
 ************************
-	Uses (DDN) Dotted Decimal Notation. TCP/IP uses he IP protocol; providing a service for forwarding IP packets from one device to another.
+	Uses (DDN) Dotted Decimal Notation. TCP/IP uses the IP protocol; providing a service for forwarding IP packets from one device to another.
 	
  Data encapsulation refers to the process of putting header(and sometimes trailers) around data.
  
@@ -82,7 +82,7 @@
 	packet - > IP & Data 	(Network layer)
 	frame - > LH & Data & LT 	(Physical layer)
 	
-		(LH -> link header | LT _> link trailer)
+		(LH -> link header | LT -> link trailer)
 		
 - OSI layers and their functions
 -----------------------------------
@@ -90,7 +90,7 @@
 		Provides an interface from the applications to the network by supplying a protocol with actions meaningful the the application, for instance, "get web page object".
 		
 	Presentation layer
-		It negotiates data formats such as ASCII text or image types like JPEG
+		It negotiates data formats such as ASCII text or image types like JPEG and encryption.
 		
 	Session layer
 		Provides methods to group multiple bidirectional messages into a workflow for easier management and easier backout of work that happened if the entire network fails.

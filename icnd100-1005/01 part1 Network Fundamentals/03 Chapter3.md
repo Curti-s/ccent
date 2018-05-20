@@ -33,7 +33,7 @@ This chapter covers WANs in 3 diff sections:
 	
 - Do I Know This Already?
 ******************************
-	1.In the cabling for a leased line, which of the following typical connects to a four-wire line provided by a teclo?
+	1.In the cabling for a leased line, which of the following typically connects to a four-wire line provided by a teclo?
 	????
 	
 	a. Router serial interface without internal CSU/DSU
@@ -102,7 +102,7 @@ This chapter covers WANs in 3 diff sections:
 	
 - Leased-line WANs
 *******************
-	From a basic point, a leased line WAN works alot like an Ethernet crossover cable connecting 2 routers, but wiht few distance limitations. However each router can send at anytime > (full duplex) over the leased line for tens, hundreds or even thousands of miles.
+	From a basic point, a leased line WAN works alot like an Ethernet crossover cable connecting 2 routers, but with few distance limitations. However each router can send at anytime > (full duplex) over the leased line for tens, hundreds or even thousands of miles.
 	Main goal of WAN is to move data between LANs.
 	
 -- Story
@@ -141,19 +141,27 @@ This chapter covers WANs in 3 diff sections:
 	
 	NB::
 		Serial communication not clear..?/#
-		
+		Explanation
+			The process of sending data one bit at a time, sequentially over a communication channel or computer bus which is in contrast with parallel communication where
+			several bits are sent as a whole on a link with several parallel channels. 
+			For serial communication, the Most Significant Bits are sent first then the Least Significant bits follow, unlike in parallel where all bits are sent as a whole on
+			separate parallel channels.
+			Serial communication is used for long-haul communication where cost of cabling and synchronization make it impractical to implement parallel communication.
+			
+			
+			
 - Leased line cabling
 ***********************
 	Some physical path must exist between 2 routers on the end links.
-	However, a telco doesn't install only 1 cable between the 2 buildings. Instead it uses what us typically a large and complex network that creates an appearance of a cable between the two routers. Telcos install their equipment in buildings called Central Offices (CO), then install their cables from the CO to almost every other building in the city, expecting to sell services to the people in those buildings one day. The Telco will then configure its switches to  use some capacity on each cable to send data in both directions, creating the quivalent of a crossover cable between two routers.
-	First, each site has a Customer Premise Equipment (CPE) which includes a router, serial interface carrd and (CSU/DSU) Channel Service Unit/Data Service Unit. Routers contain NICs for sending data over a physical link. The physical link requires a function called Channel Service Unit/Data Service Unit which can either be intergrated into the serial interface card in the router or sit outside the router as an external device.
-	Short serial cables are used to connect the router to the CSU/DSU, typically using RJ-48 connectors. The serial cables are called Data Terminal Equipment (DTE) cables with a male connector. To create a WAN link, you require 2 serial cables, one serial DTE and a similar but slightly different matching (DCE) Data Communication Equipment cable using a femal connector. The DCE cable swaps the transmitter and reciever hence acting as a straight-through cable.
+	However, a telco doesn't install only 1 cable between the 2 buildings. Instead it uses what is typically a large and complex network that creates an appearance of a cable between the two routers. Telcos install their equipment in buildings called Central Offices (CO), then install their cables from the CO to almost every other building in the city, expecting to sell services to the people in those buildings one day. The Telco will then configure its switches to  use some capacity on each cable to send data in both directions, creating the quivalent of a crossover cable between two routers.
+	First, each site has a Customer Premise Equipment (CPE) which includes a router, serial interface card and (CSU/DSU) Channel Service Unit/Data Service Unit. Routers contain NICs for sending data over a physical link. The physical link requires a function called Channel Service Unit/Data Service Unit which can either be intergrated into the serial interface card in the router or sit outside the router as an external device.
+	Short serial cables are used to connect the router to the CSU/DSU, typically using RJ-48 connectors. The serial cables are called Data Terminal Equipment (DTE) cables with a male connector. To create a WAN link, you require 2 serial cables, one serial DTE and a similar but slightly different matching (DCE) Data Communication Equipment cable using a female connector. The DCE cable swaps the transmitter and reciever hence acting as a straight-through cable.
 	Finally,the router with DCE cable installed needs to do one function, which is normally done by the CSU/DSU; **clocking**, in which it tells the router when exactly to send each bit through signalling over the serial cable.
 	Regardless of whether a router is of newer or older version, I will want to know how to configure clocking using the **clock rate** command.	
 	
 - Data-link Details of Leased Lines
 *************************************
-	Leased line provides Layer 1 service / transmission of bits. However it doesn't define data link ayer protocols to be used.
+	Leased line provides Layer 1 service / transmission of bits. However it doesn't define data link layer protocols to be used.
 	Therefore many companies/standard orgs have created data-link protocols to control and use leased lines.
 	Most popular protocols:
 		* High-Level Data Link Control (HDLC)
@@ -161,7 +169,8 @@ This chapter covers WANs in 3 diff sections:
 		
 - HDLC Basics
 *****************
-	All data link layer protocols perform similar roles: controlling the correct delivery of data over a physical link. eg Etherne data-link protocol uses a destination address field to identify the correct device that should receive data and an FCS field that allows receiving device to determine whether the receving data arrived correctly. HDLC provides the same.
+	All data link layer protocols perform similar roles: controlling the correct delivery of data over a physical link. eg Ethernet data-link protocol uses a destination address field to identify the correct device that should receive data and an FCS field that allows receiving device to determine whether the receving data arrived correctly. HDLC provides the same.
+	
 	HDLC fields and functions:
 		Flag
 			> Preamble
@@ -187,7 +196,7 @@ HDLC exist because of the International Organization for Standardization (ISO). 
 - Ethernet as a WAN technology
 *********************************
 	Ethernet was only appropriate for LANs due to restrictions on cable length and the devices that might allow a LAN that stretched a kilometer or 2.
-	Improvements by IEEE saw Ethernet being a reasonable WAN technology. eg 1000BASE-LX standard uses single-mde fiber cabling twith support for 5 km cable length; 1000BASE-ZX standard supports even longer 70 km cable length.
+	Improvements by IEEE saw Ethernet being a reasonable WAN technology. eg 1000BASE-LX standard uses single-mode fiber cabling with support for 5 km cable length; 1000BASE-ZX standard supports even longer 70 km cable length.
 	
 	eg
 		CPE ----(fiber ethernet access link)---> Service Provider(Ethernet WAN service) (Point of Presence)
@@ -208,15 +217,16 @@ The type of EoMPLS service covered, gives a customer an Ethernet link between tw
 - How routers route IP packets using Ethernet Emulation
 ********************************************************
 	General nature of WAN is to give IP routers a way to forward IP packets from one LAN to another. Routing over an EoMPLS WAN link still uses the WAN like WAN, as a way to forward packets from one site to another, while using the same Ethernet protocols as the Ethernet WAN links at each site.
-	EoMPLS link uses Ethernet for both layer 1 and layer 2 functions. i.e same Ethernet header and trailer
+	EoMPLS link uses Ethernet for both layer 1 and layer 2 functions. i.e same format of Ethernet header and trailer but diff details.
 	
 	PC1----------> Switch-------> Router1(G0/1(LAN 1))--------##(EoMPLS WAN)##--------->Router2(G0/0(LAN 2))------->Switch-------->PC2
 NB::
 	##(EoMPLS)## denotes that this Ethernet link uses an Ethernet WAN service.
 	Routing steps:
-		1.PC1 encapsulates the IP packet to R! in an Ethernet Frame that has the destination MAC address of R1
-		2.R1 de-encapsulates  the IP packet from the Ethernet Frame and encapsulates it into a new Ethernet frame with a new Ethernet header and trailer. The destination MAC address is R2 G0/0 MAC address and the source is R1 G0/1 MAC address.
-		3.R2 de-encapsulates the IP packet from the Ethernet frame, encapsulates the packet into an Ethernet frame with destination MAC address of PC2.	
+		1.PC1 encapsulates the IP packet to R1 in an Ethernet Frame that has the destination MAC address of R1
+		2.R1 de-encapsulates  the IP packet from the Ethernet Frame and encapsulates it into a new Ethernet frame with a new Ethernet header and trailer. 
+		The destination MAC address is R2 G0/0 MAC address and the source is R1 G0/1 MAC address.
+		3.R2 de-encapsulates the IP packet from the Ethernet frame, encapsulates the packet into a new Ethernet frame with destination MAC address of PC2.	
 	
 	NB::
 		Ethernet over MPLS and DSL do not replace Leased lines in any way as WAN technologies but play an important role in specific case of creating a WAN connection between a home or office and the internet.
@@ -235,6 +245,10 @@ NB::
 		
 	DSL supports assymetrical speeds, meaning, the transmission speed from the ISP towards the home(downstream) is much faster than the transmission towards te ISP(upstream).
 	
+- DSL
+********
+	Digital Subscriber Line -> relatively short high-speed WAN between a telco customer and an ISP. It uses telephone line which terminates at RJ-11 ports.
+DSLAM > DSL Access Multiplexer. It splits out the data over to the router and voice signals over to the voice switch
 	Review topics:
 		- Typical diagram for CPE for a leased line
 		- Ethernet over MPLS physical connection

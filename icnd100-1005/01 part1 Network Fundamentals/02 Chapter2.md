@@ -22,13 +22,14 @@ Ethernet LAN happen to use cables for the links between nodes, oftenly called wi
 	
 	Only devices that are using cables are using Ethernet.
 
-2. Which of the following Ethernt starndards defines Gigabit Ethernet over UTP cabling?
+2. Which of the following Ethernet starndards defines Gigabit Ethernet over UTP cabling?
 	
 	10000Base-T
 	
 3. Which of the following is true about Ethernet crossover cables for FastEthernet?
 	
-	Pins 1 and 2 on one end of the cable connect to pins 3 and 4 on the other end of the cable.
+	Pins 1 and 2 on one end of the cable connect to pins 3 and 6 on the other end of the cable.
+		Endpoints receive and transmit on the same pins
 	
 4. Each answer lists two types of devices used in a 100BASE-T network. If these devices were connected with UTP Ethernet cables, which pairs of devices would require a straight-through cable?
 	
@@ -91,21 +92,21 @@ Ethernet refers to a family of LAN standards that together define the physical a
 
 	Speed | Common Name | Informal IEEE Standard name| Formal Standard Name
 
-	10Mbps | Ethernet | 10BASE-T | 802.3
-	100Mbps | FastEthernet | 100BASE-T | 802.3u
-	1000Mbps | Gigabit Ethernet | 1000BASE-LX | 802.3z | Fiber
-	10000Mbps | Gigabit Ethernet | 1000BASE-T | 802.3ab
-	10Gbps | 10 Gig Ethernet | 10BASE-T | 802.3an
+	10Mbps | Ethernet | 10BASE-T | 802.3 | Copper, 100m
+	100Mbps | FastEthernet | 100BASE-T | 802.3u | Copper, 100m
+	1000Mbps | Gigabit Ethernet | 1000BASE-LX | 802.3z | Fiber, 5000m
+	1000Mbps | Gigabit Ethernet | 1000BASE-T | 802.3ab | Copper, 100m
+	10Gbps | 10 Gig Ethernet | 10GBASE-T | 802.3an | Copper, 100m
 
 
-While physical standards focus on sending bits over a cable, data-link layer focuses on sending an Ethernet fram from source to destination ethernet node.
+While physical standards focus on sending bits over a cable, data-link layer focuses on sending an Ethernet frame from source to destination ethernet node.
 
 The term frame specifically refers to the header and trailer of a data-link protocol plus the data encapsulated inside the header and trailer.
 
 - Demistifying UTP Ethernet link
 *************************************
 	Ethernet link refers to any physical cable between 2 Ethernet nodes. UTP cable holds copper wires grouped as twisted pairs.
-	10BASE-T and 100BASE-T standards require 2 pairs, whereas 1000BASE-T standard requires 4 wire pairs.
+	10BASE-T(802.3) and 100BASE-T(802.3u) standards require 2 pairs, whereas 1000BASE-T(802.3ab) standard requires 4 wire pairs.
 	Many Ethernet UTP cables use an RJ-45 connectors on both ends; it has 8 physical contacts.
 	
 	NB::
@@ -115,7 +116,7 @@ The term frame specifically refers to the header and trailer of a data-link prot
 ***********************************************************
 	Connecting a PC to a LAN switch.
 	Understand how NICs and switches work:
-		As a rule, Ethernet NIC transmitters use a pair connected to pins 1 & 2; the Ethenert receivers use a pair of wires at positions 3 and 6. LAN switches, knowing those facts abt the Ethernet NICs, do the opposite; the receivers use the wire pair at pins 1 & 2, and their transmitters use the wire pair at pins 3 & 6.
+		As a rule, Ethernet NIC transmitters use a pair connected to pins 1 & 2; the Ethenet receivers use a pair of wires at positions 3 and 6. LAN switches, knowing those facts abt the Ethernet NICs, do the opposite; the receivers use the wire pair at pins 1 & 2, and their transmitters use the wire pair at pins 3 & 6.
 	A straight-through cable works correctly when the nodes use opposite pairs for transmitting data.
 	
 - Crossover Cable Pinout for 10BASE-T and 100BASE-T
@@ -196,6 +197,8 @@ The term frame specifically refers to the header and trailer of a data-link prot
 			
 		* Multicast address
 			- Frames sent to multicast Ethernet address will be copied and forwaded to a subset of the devices on the LAN that volunteers to receive frames sent to a specific multicast address.
+			Multicast addresses will have a value of 1 in the least significant bit of the first octet  of the destination address, thus helping the network to distinguish btwn a multicast and broadcast. Example:
+			01:00:CC:CC:CC:CC, which is an address used by Cisco Discovery Protocol (CDP).
 	
 - Identifying Network layer protocols with the Ethernet Type Field
 *********************************************************************
@@ -211,16 +214,16 @@ The term frame specifically refers to the header and trailer of a data-link prot
 	Answer
 	*****
 	IEEE manages a list of EtherType values, so that every network layer protocol that needs a unique EtherType value can have a number. For instance a  sender can send an Ethernet frame with an IPv4 packet and the next frame with an IPv6 packet; each frame would have a diff Ethernet Type field value. eg 
-	IPv4: Etherenet Header | IPv4(Type = 0800) | Ethernet Trailer
+	IPv4: Ethernet Header | IPv4(Type = 0800) | Ethernet Trailer
 	
 	IPv6: Ethernet Header | IPv6 (Type = 86DD) | Ethernet Trailer
 	
 	
-- Error Detection with FCS
-****************************
+- Error Detection with FCS ----Frame Check Sequence-----
+*********************************************************
 	Ethernet defines away for nodes to find out whether a frame's bit has changed while crossing over an Ethernet link i.e due to electrical interference or bad NIC.
 	Frame Check Sequence, found in the Ethernet Trailer.
-	The sender applies a complex math formula to the frame before sending it, storing the rest of the formula in the FCS field. The receiver applies the same math formula to the recieved frame & then compares its own results with the sender's results. Simalar results indicate that the frame did not change otherwise the frame is dropped when results are not similar.
+	The sender applies a complex math formula to the frame before sending it, storing the rest of the formula in the FCS field. The receiver applies the same math formula to the recieved frame & then compares its own results with the sender's results. Similar results indicate that the frame did not change otherwise the frame is dropped when results are not similar.
 	NB::
 		Error detection doesn't mean Error recovery.
 		
@@ -250,6 +253,10 @@ The term frame specifically refers to the header and trailer of a data-link prot
 	The downside of using hubs, is that if 2 or more devices trasmit data,electrical signals collide and become garbled. The hub will repeat the signals to all ports at the same time,irregardless of them being garbled.
 	To prevent collisions in a switch, half-duplex logic is implemented within the nodes while using CSMA/CD. The hub itself doesn't  use the half-duplex logic.
 	
+	Half-duplex - The device must wait to send if it is currently receiving a frame: cannot send and receive at
+	the same time.
+	
+	Full duplex: - The device doesn't have to wait before sending; can send and receive at the same time.
 	
 - Key Review topics
 ******************
