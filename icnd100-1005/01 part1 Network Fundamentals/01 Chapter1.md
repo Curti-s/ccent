@@ -89,7 +89,10 @@ Smaller networks used at home for business purposes are **small office/home offi
 	Most commonly used protocols:
 		- TCP
 		- UDP
-	It provides services to the application layer protocols.
+	It provides services to the application layer protocols that reside one layer
+	higher in the TCP/IP model.
+	
+	NB - Each layer provides a service to the layer aboveit.
 	
 	- TCP Error Recovery Basics
 	****************************
@@ -97,7 +100,8 @@ Smaller networks used at home for business purposes are **small office/home offi
 		
 - IP Routing Basics
 ************************
-	Uses (DDN) Dotted Decimal Notation. TCP/IP uses the IP protocol; providing a service for forwarding IP packets from one device to another.
+	Uses (DDN) Dotted Decimal Notation. TCP/IP uses the IP protocol; providing a
+	service for forwarding IP packets from one device to another.
 	
  Data encapsulation refers to the process of putting header(and sometimes trailers) around data.
  
@@ -167,4 +171,26 @@ Steps for data encapsulation:
 		and trailer.
 
 	5. Transmit the bits.
->>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
+
+### OSI layering concepts and benefits
+Summary of benefits of layered protovol specifications:
+	
+	- Less complex: They break concepts into smaller parts.
+	
+	- Standard interfaces: Allow multiple vendors to create products that fill a
+	particular role with all benefits of open competition.
+	
+	- Easier to learn
+	
+	- Easier to develop: Reducude complexity allows for easier program changes and
+	faster product development
+	
+	- Multivedor interoperability: Comps and networking gear from multiple vendors can
+	work in the same networ
+	
+	- Modular engineering: One vendor can write software that implements higher layers
+	 for instance web browser - and another can write software that implements lower 
+	 layers for example Microsoft built-in TCP/IP software in its OS
+	 
+ OSI uses a more generic term to refer to messages: Protocol Data Unit (PDU)
+ 
