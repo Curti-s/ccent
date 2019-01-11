@@ -1,5 +1,7 @@
 - Chapter 2
 ***************
+## Fundamental of Ethernet LANs
+
 	- Covers the following exam topics
 		1.0 networking fundamentals
 			1.6 Select appropriate cabling type based on implementation requirements.
@@ -30,6 +32,10 @@ Ethernet LAN happen to use cables for the links between nodes, oftenly called wi
 	
 	Pins 1 and 2 on one end of the cable connect to pins 3 and 6 on the other end of the cable.
 		Endpoints receive and transmit on the same pins
+		The crossover cable pinout crosses the pair at the transmit pins on each device
+		to the recieve pins on the opposite device.
+		Switches transmit on the pair at pins 3 and 6 and both receive on the pair
+		at pins 1 and 2.
 	
 4. Each answer lists two types of devices used in a 100BASE-T network. If these devices were connected with UTP Ethernet cables, which pairs of devices would require a straight-through cable?
 	
@@ -47,6 +53,10 @@ Ethernet LAN happen to use cables for the links between nodes, oftenly called wi
 7. Which of the following are true about the format of Ethernet addresses?
 	
 	Each manufacturer puts a unique OUI code into the first 2 bytes of the address.
+	Each manufacturer puts a uique OUI code into the first half of the address.
+	Ethernet address is 6 bytes/48bit long / 12 digit hexadecimal number. Often
+	calle **unicast** ethernet address.
+	
 	
 8. Which of the following terms describe Ethernet address that can be used to send one frame that is delivered to multiple devices on the LAN?
 	
@@ -56,6 +66,8 @@ Ethernet LAN happen to use cables for the links between nodes, oftenly called wi
 	
 	
 Ethernet refers to a family of LAN standards that together define the physical and data link layers of the worlds most popular wired LAN technology.
+The standards defined by IEEE include: cabling - type / length, connectors on the ends
+of cables, protocol rules, speed  etc
 
 - Typical SOHO LANs
 *************************
@@ -90,13 +102,13 @@ Ethernet refers to a family of LAN standards that together define the physical a
 - Variety of Ethernet physical layer standards
 *************************************************
 
-	Speed | Common Name | Informal IEEE Standard name| Formal Standard Name
-
-	10Mbps | Ethernet | 10BASE-T | 802.3 | Copper, 100m
-	100Mbps | FastEthernet | 100BASE-T | 802.3u | Copper, 100m
-	1000Mbps | Gigabit Ethernet | 1000BASE-LX | 802.3z | Fiber, 5000m
-	1000Mbps | Gigabit Ethernet | 1000BASE-T | 802.3ab | Copper, 100m
-	10Gbps | 10 Gig Ethernet | 10GBASE-T | 802.3an | Copper, 100m
+	Speed	|	Common Name	|	Informal IEEE Standard name	| Formal Standard Name
+----------------------------------------------------------------------------------
+	10Mbps	|	Ethernet	|	10BASE-T	|	802.3	|	Copper, 100m
+	100Mbps	|	FastEthernet| 100BASE-T		|	802.3u	|	Copper, 100m
+	1000Mbps|	Gigabit Ethernet |	1000BASE-LX	|	802.3z	|	Fiber, 5000m
+	1000Mbps|	Gigabit Ethernet |	1000BASE-T	|	802.3ab	|	Copper, 100m
+	10Gbps	|	10 Gig Ethernet	 |	10GBASE-T	|	802.3an |	Copper, 100m
 
 
 While physical standards focus on sending bits over a cable, data-link layer focuses on sending an Ethernet frame from source to destination ethernet node.
@@ -226,24 +238,32 @@ The term frame specifically refers to the header and trailer of a data-link prot
 	The sender applies a complex math formula to the frame before sending it, storing the rest of the formula in the FCS field. The receiver applies the same math formula to the recieved frame & then compares its own results with the sender's results. Similar results indicate that the frame did not change otherwise the frame is dropped when results are not similar.
 	NB::
 		Error detection doesn't mean Error recovery.
-		
+		Ethernet defines that errored frames should be discarded.
 - 
 - Sending Ethernet frames with Switches and Hubs
 ***************************************************
 	Ethernet LANs behave differently depending on whether there are switches or hubs used. Basically, the use of mordern switches allows the use of full-duplex logic which is much more faster compared to half-duplex logic which is used when using hubs.
 	
 	- Sending in mordern Ethernet LANs using full-duplex
-	******************************************************
-	 Most Ethernet standards use a variety of Ethernet physical standards, but with standard Ethernet Frames which can flow over these types of physical links. Each link can be running at different speeds, with the process being relatively simple: > the simplicity lets each device send a large number of frames per second.
+
+	 Most Ethernet standards use a variety of Ethernet physical standards, but with
+	 standard Ethernet Frames which can flow over these types of physical links. Each
+	 link can be running at different speeds, with the process being relatively simple:
+	 > the simplicity lets each device send a large number of frames per second.
 	Example: PC1 sending to PC2 through switch 1 and switch2.
 	
 	PC1-----(10BASE-T(full-duplex))-----> SW1-----(G0/1 1000BASE-T (full-duplex))------->SW2-----(F0/2 100BASE-T)------->PC2
 	
 	Steps:
-	1.PC1 builds and sends the original Ethernet frame using its own  MAC address as the source address and PC2's MAC address destination address.
+	1.PC1 builds and sends the original Ethernet frame using its own  MAC address as
+	the source address and PC2's MAC address destination address.
+	
 	2.Switch 1 receives and forwards the Ethernet frame to its G0/1 interface to Switch2
+	
 	3.Switch 2 receives and forwards the Ethernet frame to its F0/2 interface to PC2
-	4.PC2 receives the Ethernet frame, recognizes the destination MAC address as its own and processes the frame.
+	
+	4.PC2 receives the Ethernet frame, recognizes the destination MAC address as its
+	own and processes the frame.
 	
 	- Using Half duplex with LAN Hubs
 	********************************
@@ -251,7 +271,23 @@ The term frame specifically refers to the header and trailer of a data-link prot
 	NB::
 		The hub has no concept of Ethernet frames.
 	The downside of using hubs, is that if 2 or more devices trasmit data,electrical signals collide and become garbled. The hub will repeat the signals to all ports at the same time,irregardless of them being garbled.
-	To prevent collisions in a switch, half-duplex logic is implemented within the nodes while using CSMA/CD. The hub itself doesn't  use the half-duplex logic.
+	To prevent collisions in a switch, half-duplex logic is implemented within the nodes while using CSMA/CD.
+	The algorithm takes care of obvious cases caused by unfortunate timing. For
+	instance, 2 nodes could check for an incoming frame at the same time & realize that
+	no other node is sending, then both send their frames at the exact instant,
+	causing a collision.
+	CSMA/CD covers these cases as well as follows:
+	
+	Step1 A device with a frame listens until the Ethernet is not busy.
+	
+	Step2 When the Ethernet is not busy, the sender begins sending the frame.
+	
+	Step3 The sender listens while sending to discover whether collision occurs; if 
+	if occurs, all currently sending nodes do the following:
+		- They send a jamming signal to inform all nodes that collision has happened.
+		- They independently choose a random time to wait before trying again to avoid 
+		unfortunate timing
+		- The next attempt starts again at step 1.
 	
 	Half-duplex - The device must wait to send if it is currently receiving a frame: cannot send and receive at
 	the same time.
@@ -262,7 +298,8 @@ The term frame specifically refers to the header and trailer of a data-link prot
 ******************
 	* Drawing a typical wirless and wireless enterprise LAN
 	* Several types of Ethernet LANs and some details about each
-	* Conceptual drawing of transmitting in one direction each over two different electrical circuits between two Ethernet nodes.
+	* Conceptual drawing of transmitting in one direction each over two different
+	electrical circuits between two Ethernet nodes.
 	* 10 and 100Mbps Ethernet straight-through cable pinouts
 	* 10 and 100Mbps crossover cable pinouts
 	* List of devices that transmit on wire pair 1,2 and pair 3,6
