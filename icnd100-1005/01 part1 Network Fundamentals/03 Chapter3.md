@@ -41,7 +41,9 @@ This chapter covers WANs in 3 diff sections:
 	c. Router serial interface with internal transceiver
 	d. Switch serial interface	
 	
-		Channel Service Unit/Data Service Unit, connects to a four wire pair from a Telco, then using a serial DTE cable it connects to a router's serial interface.
+		Channel Service Unit/Data Service Unit, connects to a four wire pair from a
+		Telco, then using a serial Date Terminal Equipment (DTE) cable it connects to a
+		router's serial interface.
 		
 	2.Which of the following is an accurate speed at which a leased line can operate in the US?
 	a. 100 Mbps
@@ -49,7 +51,7 @@ This chapter covers WANs in 3 diff sections:
 	c. 256 Kbps
 	d. 6.4 Mbps
 	
-		256Kbps. Between 6.4 Kbps and 1.544 Mbps.
+		256Kbps. Between 64 Kbps and 1.544 Mbps.
 	
 	3.Which of the following fields in the HDLC header used by Cisco router does CIsco add, beyond the ISO standard HDLC?
 	????
@@ -71,7 +73,8 @@ This chapter covers WANs in 3 diff sections:
 	HDLC header/trailer.
 	d. R1 will forward data-link frames to R2 using an
 	Ethernet header/trailer.
-		R1 will connect to a physical Ethernet link, with the other end of the cable connected to a device at the WAN service provider point of presence.
+		R1 will connect to a physical Ethernet link, with the other end of the cable
+		connected to a device at the WAN service provider point of presence.
 	
 		R1 will forward data-link frames to R2 using an Ethernet header/trailer.
 	
@@ -82,7 +85,11 @@ This chapter covers WANs in 3 diff sections:
 	c. Cable Internet
 	d. BGP
 	
-		DSL and Cable Internet. This means that there are faster downstream(data transmission from the ISP to the customer) compared to upstream( data transmission to the ISP). Assymetric speeds work much better for consumer internet access from home, because clicking a webpage sends afew hundred bytes upstream but can trigger the delivery of many megabytes of data downstream.
+		DSL and Cable Internet. This means that there are faster downstream(data
+		transmission from the ISP to the customer) compared to upstream( data
+		transmission to the ISP). Assymetric speeds work much better for consumer
+		internet access from home, because clicking a webpage sends a few hundred bytes
+		upstream but can trigger the delivery of many megabytes of data downstream.
 	
 	6. Fred has just added DSL service at his home, with a separate DSL modem and consumer-grade router with four Ethernet ports. He wants to use the same old phone he was using before the installation of DSL. Which is most likely true about the phone cabling and phone used with new DSL installation?
 	????
@@ -121,17 +128,23 @@ This chapter covers WANs in 3 diff sections:
 	To create such possibly long leased line links, or circuits, it doesn't actualy exist as a single long cable between the two sites. Instead a telco installs a large network of cables and specialized switching devices to create its own computer network that acts as crossover cable between two points.
 	
 	NB:: Telco - Telephone Company.
-	Leased line : similarly to service provider.
+	Leased line : similarly to service provider. Referss to the fact thata company
+	using the leased line doesn't own it but instead pays a monthly lease fee to use
+	it.
 	
 	Names used in telco terminology
 	********************************
 	Name | Meaning/Reference
 	-----|--------------------
-	Leased circuit, Circuit | Line and Circuit are oftenly used as synonyms in telco terminology, Circuit makes reference to the electrical circuit  between 2 endpoints.
+	Leased circuit, Circuit | Line and Circuit are oftenly used as synonyms in telco
+	terminology, Circuit makes reference to the electrical circuit  between 2 endpoints.
 	
-	Serial link, Serial line | Line and Link are oftenly used as  synonyms. Serial refer to the fact the bits flow serially between 2 endpoints & that routers use serial interfaces.
+	Serial link, Serial line | Line and Link are oftenly used as  synonyms. Serial
+	refer to the fact the bits flow serially between 2 endpoints & that routers use
+	serial interfaces.
 	
-	Point-to-point link/line | Refers to the fact that a topology stretches between 2 points & 2 points only.
+	Point-to-point link/line | Refers to the fact that a topology stretches between 2
+	points & 2 points only.
 	
 	T1 | Specific type of leased line transmitting at 1.544 Mbps
 	
@@ -142,22 +155,31 @@ This chapter covers WANs in 3 diff sections:
 	NB::
 		Serial communication not clear..?/#
 		Explanation
-			The process of sending data one bit at a time, sequentially over a communication channel or computer bus which is in contrast with parallel communication where
-			several bits are sent as a whole on a link with several parallel channels. 
-			For serial communication, the Most Significant Bits are sent first then the Least Significant bits follow, unlike in parallel where all bits are sent as a whole on
-			separate parallel channels.
-			Serial communication is used for long-haul communication where cost of cabling and synchronization make it impractical to implement parallel communication.
+			The process of sending data one bit at a time, sequentially over a
+			communication channel or computer bus which is in contrast with parallel
+			communication where several bits are sent as a whole on a link with several
+			parallel channels. 
+			For serial communication, the Most Significant Bits are sent first then the
+			Least Significant bits follow, unlike in parallel where all bits are sent
+			as a whole on separate parallel channels.
+			Serial communication is used for long-haul communication where cost of
+			cabling and synchronization make it impractical to implement parallel
+			communication.
 			
 			
 			
 - Leased line cabling
 ***********************
 	Some physical path must exist between 2 routers on the end links.
-	However, a telco doesn't install only 1 cable between the 2 buildings. Instead it uses what is typically a large and complex network that creates an appearance of a cable between the two routers. Telcos install their equipment in buildings called Central Offices (CO), then install their cables from the CO to almost every other building in the city, expecting to sell services to the people in those buildings one day. The Telco will then configure its switches to  use some capacity on each cable to send data in both directions, creating the quivalent of a crossover cable between two routers.
+	However, a telco doesn't install only 1 cable between the 2 buildings. Instead it uses what is typically a large and complex network that creates an appearance of a cable between the two routers. Telcos install their equipment in buildings called Central Offices (CO), then install their cables from the CO to almost every other building in the city, expecting to sell services to the people in those buildings one day. The Telco will then configure its switches to  use some capacity on each cable to send data in both directions, creating the equivalent of a crossover cable between two routers.
 	First, each site has a Customer Premise Equipment (CPE) which includes a router, serial interface card and (CSU/DSU) Channel Service Unit/Data Service Unit. Routers contain NICs for sending data over a physical link. The physical link requires a function called Channel Service Unit/Data Service Unit which can either be intergrated into the serial interface card in the router or sit outside the router as an external device.
-	Short serial cables are used to connect the router to the CSU/DSU, typically using RJ-48 connectors. The serial cables are called Data Terminal Equipment (DTE) cables with a male connector. To create a WAN link, you require 2 serial cables, one serial DTE and a similar but slightly different matching (DCE) Data Communication Equipment cable using a female connector. The DCE cable swaps the transmitter and reciever hence acting as a straight-through cable.
+	Short serial cables are used to connect the router to the CSU/DSU, typically using RJ-48 connectors. The serial cables are called Data Terminal Equipment (DTE) cables with a male connector. To create a WAN link, you require 2 serial cables, one serial DTE and a similar but slightly different matching (DCE) Data Communication Equipment cable using a female connector. The DCE cable swaps the transmitter and reciever hence acting as a crossover cable.
+	DCE cable has a female connector while the DTE has a male connector
 	Finally,the router with DCE cable installed needs to do one function, which is normally done by the CSU/DSU; **clocking**, in which it tells the router when exactly to send each bit through signalling over the serial cable.
 	Regardless of whether a router is of newer or older version, I will want to know how to configure clocking using the **clock rate** command.	
+	
+	>> "Bandwith and Clock Rate on Serial Interfaces -> chapter 17 Operating Cisco
+	Routes"
 	
 - Data-link Details of Leased Lines
 *************************************
@@ -170,6 +192,9 @@ This chapter covers WANs in 3 diff sections:
 - HDLC Basics
 *****************
 	All data link layer protocols perform similar roles: controlling the correct delivery of data over a physical link. eg Ethernet data-link protocol uses a destination address field to identify the correct device that should receive data and an FCS field that allows receiving device to determine whether the receving data arrived correctly. HDLC provides the same.
+	HDLC has less work to do because of the simple point-to-point topology of a 
+	point-to-point leased line. When a router send an HDLC frame, it can only go to
+	one place: the other end of the link.
 	
 	HDLC fields and functions:
 		Flag
@@ -191,8 +216,18 @@ This chapter covers WANs in 3 diff sections:
 			
 HDLC exist because of the International Organization for Standardization (ISO). However ISO standard HDLC doesn't have a type field and routers need to know the type of the packet of a frame. Therefore, CISCO routers use a proprietary HDLC version which adds a Type field.
 	Flag | Address | Control | Type | Data | FCS
+bytes 1     1         1          2    var     2
 	
 	
+- How Routers use WAN Data Link
+*********************************
+Routers connect physically to LANs and WANs, with those LANs and WANs requiring that
+date be sent inside data-link frames. (How routes use the HDLC protocol when sending
+data)
+First, TCP/IP network layer focuses on forwarding IP packets from the sending host
+to the destination host. The underlying WAN and LAN just act as way to move those 
+packets to the next router or end-user device.
+
 - Ethernet as a WAN technology
 *********************************
 	Ethernet was only appropriate for LANs due to restrictions on cable length and the devices that might allow a LAN that stretched a kilometer or 2.
@@ -256,3 +291,16 @@ DSLAM > DSL Access Multiplexer. It splits out the data over to the router and vo
 		- Typical DSL cabing at home
 		- Typical cable internet cabling at home
 	
+	
+Additional knowledge::
+
+EoMPLS is a tunneling mechanism that transports layer 2 Ethernet frames over MPLS 
+network.You can connect two layer 2 devices that are in different locations, without
+requiring bridges, routes,or switches at the locations
+
+MPLS is packet-switching technology,that integrates layer 2(link layer) switching with layer 3 routing(network layer). Data is transferred overy any combination of layer 2
+protocols using layer 3 protocol with increased scalability.
+
+EoMPLS and HDLC protocols are used in WAN connections.
+EoMPLS uses Ethernet header for encapsulation: HDLC uses HDLC header for encapsulation.
+
