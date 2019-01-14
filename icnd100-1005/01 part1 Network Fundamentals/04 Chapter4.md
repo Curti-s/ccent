@@ -14,7 +14,7 @@ TCP/IP network layer 3 defines how to deliver IP packets over the entire trip, f
 	Cooperating functions required to route packets:
 		* IP routing:
 			The process of hosts and routers forwarding IP packets(Layer 3 PDU), 
-			while relying on the underlying LAN and WAN
+			while relying on the underlying LAN and WAN to forward the bits.
 		* IP addressing:
 			The address which is used to identify a packets's source and destination 
 			host computer. Addressing rules organize addresses into groups,
@@ -51,7 +51,13 @@ NB::
 		
 	5.Imagine a network with 2 routers that are connected with a point-to-point HDLC serial link. Each router has an Ethernet, with PC1 sharing the Ethernet with Router1 and PC2 sharing the Ethernet with Router2. When PC1 sends data to PC2, which of the following is true?
 		Router1 strips the Ethernet header and trailer off the frame received from PC1, never to be used again.
-		HDLC protocol will exist between 2 point-to-point routers inorder to link two LAN connections into a WAN (hence simulating a crossover cable).
+		HDLC protocol will exist between 2 point-to-point routers inorder to link two
+		LAN connections into a WAN (hence simulating a crossover cable).
+	PC1 encapsulates the IP packet into an Ethernet frame. R1 de-encapsulates the
+	IP packet from the Ethernet frame and encapsulates it with an HDLC header and
+	trailer with R2 destination MAC address. R2 de-encapsulates the IP packet from
+	the Ethernet frame and encapsulates it into an new Ethernet frame with PC2 as 
+	destination MAC address. PC2 de-encapsulates the data for processing.
 	
 	6.Which of the following does a router normally use when making a decision about routing TCP/IP packets?
 		Destination IP address.
@@ -62,8 +68,13 @@ NB::
 		
 	8.Which of the following are function of a routing protocol?
 	?????
-		Learning routes for subnets directly connected to the router
-		Forwarding IP packets based on a packet's destination IP address.
+		Advertising known routes to neighbouring routes
+		Learning routes and putting those routes into the routing table for routes
+		advertised to the routes by its neighboring routers.
+		but...
+		independent of the routing protocol, routers learn routes for IP subnets and 
+		networks directly connected its interface, forwarding IP packets based on the
+		packet's destination address.
 		
 	9.A company implements a TCP/IP network, with PC1 sitting in an Ethernet LAN. Which of the following protocols and features requires PC1 to learn information from some other server device?
 		DNS Domain Naming System
@@ -96,7 +107,7 @@ NB::
 	contain data-link addresses; the PCs and routers must have a way of 
 	deciding what data-link addresses to use.
 	An example of how the router determines which data-link address to use 
-	is the IP Address Resolution Protocol. For instance, Router 3 will use
+	is the IP **Address Resolution Protocol**. For instance, Router 3 will use
 	ARP to learn about the MAC address of PC2 before sending any packets.
 	
 	Path selection: sometimes used to refer to the routing process or routing
@@ -120,8 +131,8 @@ NB::
 	Any interface that expects to receive IP packets needs an IP address.
 
 	TCP/IP groups IP addresses together so that IP addresses on the same 
-	physical network are part of the same IP address group called an IP 
-	network or an IP subnet.
+	physical network are part of the same IP address group called an 
+	**IP network** or an **IP subnet**.
 	
 	Numerically, addresses of the same IP network have the same value in the
 	first part of their address.
@@ -140,7 +151,17 @@ NB::
 	Time to Live | Protocol | Header Checksum
 			Source IP address
 			Destination IP Address	
+			Options(optional)
 			
+	IPv4 minimum header size: 20bytes
+	IPv4 maximum header size: 60bytes
+	
+	The internet protocol (IP) defined in [RFC 791](http://tools.ietf.org/html/rfc791)
+	specifies the format of an IP header. In the header there is the (IHL) -> Internet
+	Header Length field which is 4bits long and specifies the header in 32 bit words.
+	It holds values from 0 (binary 0000) to 15 (Binary 1111). Therefore the longest
+	IPv4 header size can be 15*32bits = 480bits / 60bytes
+	 
 - Routing protocols
 *************************
 	For routing to work, both hosts and routers need to know smth abt the TCP/IP internetwork; hosts will require to know the IP address of the default gateway/router so that they can send packets to remote destinaions.
@@ -159,7 +180,7 @@ How IP addressing relates to IP routing.
 	that can send and receive IP packets.
 	
 	IP address consist of a 32 bit number, usually written in Dotted Decimal
-	Notation (DDN), (represented in 8bits).
+	Notation (DDN), (represented in 8bits / 8 octets).
 	
 	Range of each octet is between 0 and 255, inclusive.
 	
@@ -183,16 +204,35 @@ NB::
 	being in the same location, specifically on a single instance of a LAN
 	or WAN data link.
 	
+	For any TCP/IP internetwork, each LAN and WAN link will use either an IP 
+	network or an IP subnet.
+	
+	Concepts behind IP networks followed by IP subnets --
+												         +
+												         +
+												         
 	
 - Class A , B and C IP networks
 *********************************
-	IPv4 address space includes literally 232 different values existing in
-	a 32bit number, for more than 4billions different numbers. With DDN 
+	**IPv4 address space** includes literally 232 different values existing in
+	a 32bit number, for more than 4billion different numbers. With DDN 
 	values, these numbers include all combinations of the values 0 through
 	255 in all four octets.
 	
 	IP standards first subdivide the entire address space into classes, as
 	identified by the value of the first octet.
+	Class A gets roughly half of the IPv4 address space with all DDN numbers
+	beginning with 1- 126.
+	
+	Class B gets one fourth of the address space with all DDN numbers that begin
+	with 128 - 191 inclusive.
+	
+	Class C gets one eight of the address space, with all numbers that begin with
+	192 - 223.
+	
+	Class D 224 - 239 Multicast 1/16
+	
+	Class E 240 - 255 Reserved (Formerly Experimental) 1/16
 	
 	Network ID is just one reserved DDN value per network that indentifies 
 	the IP network. It cant be used by a host as an IP address.
@@ -402,18 +442,58 @@ To match a routing table entry, a router thinks like this:
 	Routing process depends heavily on having an accurate up-to date IP 
 	routing table on each router. 
 	
+	Rules of IP routing:
+		Step 1. If the destination IP address is in the same IP subnet as I am, send the
+		packet directly to that destination host
+		
+		Step 2: Otherwise, send the packet to my default gateway.
+		
+		
+	Summary of a router forwarding logic
+		Step 1. Use the data link FCS field to ensure that the frame had no errors,
+		if errors occurred, discard the frame
+		
+		Step 2 Assuming that the old frame was not discarded, discard the old data
+		link header and trailer leaving the IP packet
+		
+		Step 3 Compare the IP packet's destination IP address to the routing table 
+		and find the route that best matches the destination address. This route 
+		identifies the outgoing interface of the router and possibly the next hop
+		router IP address
+		
+		Step 4 Encapsulate the IP packet inside a new data-link header and trailer, 
+		appropriate for the outgoing interface and forward the frame.
+	
 	Goals of a routing protocol:
-		Dynamically learn and fill routing tables with a route to each
+		To dynamically learn and fill routing tables with a route to each
 		subnet in the subnetwork.
 		
-		If more than one route to a subnet is available, place the best route.
+		If more than one route to a subnet is available, place the best route to the
+		routing table.
 		
+		To notice when the routes in the table are no longer valid and remove them.
 		If a route is removed from the routing table and another route 
 		through another neighbouring router is available, add the route
 		to the routing table.
 		
-		The time interval between loosing the route and finding a working
-		To work quickly when adding new routes or replacing lost routes
-		replacement route is Convergence time.
+		
+		To work quickly when adding new routes or replacing lost routes.
+		The time interval between loosing the route and finding a working replacement
+		route is Convergence time.
 		
 		To prevent routing loops.
+		
+		
+	Routing protocols all use some similar ideas to allow routes to learn routing
+	information from each other. Of course, each routing protocol works differently.
+	However:
+		- Each router,independent of the routing protocol adds a route to its routing
+		table for each subnet directly connected to the router
+		
+		- Each router's routing protocol tells its neighbors about the routes in its
+		routing table, including the directly connected routes and routes learned from
+		other routers.
+		
+		- After learning a new route from a  neighbor, the router's routing protocol 
+		adds a route to its IP routing table with the next-hop router of that route
+		typically being the neighbor from which the route was learned.
