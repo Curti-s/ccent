@@ -132,24 +132,24 @@ TCP/IP layer 4 protocols: TCP and UDP
 	********* | **************************************************************************
 	
 	Multiplexing using port numbers
-		Function that allows receiving hosts to choose the correct application for which the 
-		data is destined, based on the port number.
+		Function that allows receiving hosts to choose the correct application for
+		which the data is destined, based on the port number.
 		
 	Error recovery (Reliability)
-		Process of numbering and acknowledging data with Sequence and acknowledgement header
-		fields.
+		Process of numbering and acknowledging data with Sequence and acknowledgement
+		header fields.
 		
 	Flow Control using windowing
-		Process that uses window sizes to protect the buffer space and routing devices from
-		being overloaded with traffic.
+		Process that uses window sizes to protect the buffer space and routing devices
+		from being overloaded with traffic.
 		
 	Connection establishment and termination
 		Process used to initialize port numbers and sequence and acknowledgement fields.
 		
 	Ordered data transfer and data segmentation
 		Continious stream of bytes from an upper-layer process that is "segemented"
-		for transmission and delivery to upper layer processes at the receving device, with
-		the bytes in the same order.
+		for transmission and delivery to upper layer processes at the receving device,
+		with the bytes in the same order.
 		
 Transmission Control Protocol
 *****************************
@@ -214,7 +214,7 @@ Multiplexing using port numbers
 	
 	The same concept applies to UDP.
 	NB::
-		Find all RFCs ar www.rfc-editor.org/rfc/rfcxxx.txt, where xxx is the number of 
+		Find all RFCs at []!(www.rfc-editor.org/rfc/rfcxxx.txt), where xxx is the number of 
 		the RFC.
 		
 Popular TCP/IP Applications
@@ -345,10 +345,58 @@ Connection Establishment & Termination
 		or has a required established correlation between 2 endpoints
 		
 	Connectionless protcol:
-		A protocol that does not require an exchange of messages and does not
-		require a pre-established correlation between 2 endpoints.
-		
+		A protocol that neither requires an exchange of messages when data transfer
+		begins, nor a pre-established correlation between 2 endpoints
     
-		    
-		    
+### Error recovery and reliability
+
+TCP provides for reliable data transfer which is alse called 
+**reliability or error recovery**. It is accomplished through numbering data bytes using
+sequence and acknowledgment fields in the TCP header.
+
+The convention of acknowledging by listing the next expected byte, rather than the
+number of the last byte received is called **forward acknowledgment**
+
+### Flow control using windowing
+TCP implements flow control using a window concept that is applied to the amount of
+data that can be outstanding and waiting acknowledgment at any one point in time.
+The window concept lets the receiving host tell the sender how much data it can
+receive right now, giving the receiving host a way to make the sending host slow down
+or speed up.
+The receiver can slide the window size up or down - called **sliding window** or
+**dynamic window.**
+
+Examples might give one the impression that TCP makes hosts sit and wait for
+acknowledgment alot.However, TCP does not want to make the sending host have to wait
+to send data. For instance, if an acknowledgment is received before the window is 
+exhausted, a new window begins and the sender continues sending data until the current
+window is exhausted.
+
+In a network with few problems, few lost segments and little congestion, the TCP window
+stays relatively large with hosts seldom waiting to send,
+
+### User datagram protocol
+Provides a service for applications to exchange messages.
+Connectionless.
+Provides no reliability, no windowing, no reordering of received data and no 
+segmentation of large chunks of data into the right size for transmission.
+However it provides, data transfer and multipexing using port numbers, using fewer 
+bytes of overhead and less processing required than TCP.
+
+Only apps that are tolerant to data loss use UDP. For instance, VoIP uses UDP because if
+a voice packet is lost, by the time the loss could be noticed and the packet 
+retransmitted, too much delay would have occured and the voice would be unintelligible.
+DNS requests use UDP because the user will retry an operation if the DNS resolution
+fails.
+The Network File System, a remote file system application, performs recovery with 
+application layer code, therefore UDP features are acceptable.
+
+UDP header format:
+	has 8 bytes, compared to 20 bytes in TCP header
+	
+	|------------------- 4 bytes -------------------|
+	   source port         |   destination port
+	   length              |   checksum
+	   
+
 		 
