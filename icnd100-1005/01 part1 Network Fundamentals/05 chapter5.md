@@ -383,8 +383,14 @@ segmentation of large chunks of data into the right size for transmission.
 However it provides, data transfer and multipexing using port numbers, using fewer 
 bytes of overhead and less processing required than TCP.
 
+<<<<<<< HEAD
 Only realtime communication and apps that are tolerant to data loss use UDP. For
 instance, VoIP uses UDP because if a voice packet is lost, by the time the loss could be noticed and the packet retransmitted, too much delay would have occured and the voice would be unintelligible.
+=======
+Only apps that are tolerant to data loss use UDP. For instance, VoIP uses UDP because if
+a voice packet is lost, by the time the loss could be noticed and the packet 
+retransmitted, too much delay would have occured and the voice would be unintelligible.
+>>>>>>> 0f90d4ca84bc1d46db1e16c7a4f373cdbb1d6653
 DNS requests use UDP because the user will retry an operation if the DNS resolution
 fails.
 The Network File System, a remote file system application, performs recovery with 
