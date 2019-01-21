@@ -10,8 +10,9 @@
 		
 
 This chapter has 2 major sections:
-	- Concept behind LAN switching, which was introduceb in chapter 2
+	- Concept behind LAN switching, which was introduced in chapter 2
 	  "Fundamentals of Ethernet LANs"
+	  
 	- Using IOS show commands to verify that Cisco switches actually learnt the MAC
 	  addresses, built its MAC address table and forwarded frames.
 	  
@@ -76,6 +77,8 @@ Do I Know This Already?
 	 	MAC address table
 	 	
 	 >> It compares the unicast source address to the bridging, or MAC address table.
+	 	Learning always occurs by looking at the source MAC address in the frame then
+	 	adds the incming interface as the associated port
 
 5.	A cisco catalyst switch has 24 10/100 ports, numbered 0/1 through 0/24. Ten PCs 
 	connect to the ten lowest numbered port, with these PCs working and sending data
@@ -89,9 +92,10 @@ Do I Know This Already?
 	 
 	 >>	Port Fast Ethernet 0/5 is in a connected state.
 	 	Remember, for interfaces supporting multiple speeds, the fastest speed is 
-	 	what is going to be used to indentify it. Therefore, it is not right to say
+	 	what is going to be used to identify it. Therefore, it is not right to say
 	 	that Port Ethernet 0/1 is in a connected state, because it is of 10/100 speed.
 	 	
+	 	Keyword **Ethernet** & **Fast Ethernet**
 
 
 LAN Switching Concepts
