@@ -57,9 +57,11 @@ Do I Know This Already?
 	 D. A **transport input ssh** vty subcommand
 	 
 	 >> A **login** vty mode subcommand
-		The co-workers will be logging in remotely into the switch using either Telnet or SSH.
-		Therefore, in line configuration of the vty mode, an engineer will set up a login command
-		that will require a password with no username for remotely logged in users.
+		The co-workers will be logging in remotely into the switch using either Telnet
+		or SSH.
+		Therefore, in line configuration of the vty mode, an engineer will set up a
+		login commandthat will require a password with no username for remotely logged
+		in users.
 	 
 3.	 An engineer formerly configured a Cisco 2960 switch to allow Telnet access so that the
 	switch expected a password of **mypassword** from the Telnet user. The engineer then 
@@ -142,7 +144,7 @@ Do I Know This Already?
 6.	 Which of the following line subcommands tells a switch to wait until a show command's output
 	has completed before displaying log messages on the screen?
 	
-	 A. **loggin synchronous**
+	 A. **login synchronous**
 	 B. **no ip domain-lookup**
 	 C. **exec-timeout 0 0**
 	 D. **history size 15**
@@ -513,7 +515,7 @@ Host and Switch IP settings
 	 To send IP packets to hosts in a different subnet, send the to the local router, that is, 
 	 the default gateway.
 	 
-	For instance a switch connected to a router: the switch will user and IP address of
+	For instance a switch connected to a router: the switch will use an IP address of
 	192.168.1.200 as configured for interface VLAN 1. However, to communicate with the Router,
 	(the default gateway), to forward IP packets to a host, the Switch has to connect to it.
 	
@@ -694,11 +696,6 @@ line console 0 : Changes the context to console config mode.
 line vty 1st-vty last-vty : Changes the context to vty config mode for the range 
 of vty lines listed in the command.
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 1657456a6e0893083b9d541a2268d1d150b660c9
 login : Console and vty config mode. Tells the IOS to prompt for a password.
 
 password pass-value : Console and vty config mode. Lists the password required 'if the login command (with no params) is configured.
